@@ -187,33 +187,6 @@
       box-shadow: 0 10px 30px rgba(114, 47, 55, 0.2);
     }
 
-    .scroll-indicator {
-      position: absolute;
-      bottom: 3rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeUp 1s ease 1.2s forwards;
-    }
-
-    .scroll-indicator span {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--burgundy);
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: var(--burgundy);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-
     /* Services Section */
     .services {
       padding: 8rem 4rem;
@@ -478,17 +451,6 @@
       }
     }
 
-    @keyframes scrollPulse {
-      0%, 100% {
-        transform: scaleY(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scaleY(0.5);
-        opacity: 0.5;
-      }
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
       nav {
@@ -536,12 +498,6 @@
       <h1 class="hero-title">Love by the Studio</h1>
       <p class="hero-subtitle">A personalized creative journey designed for intentional couples who seek a more elevated, curated and unique wedding brand.</p>
       <a href="#contact" class="cta-button">Book Your Spot</a>
-    </div>
-    <div class="scroll-indicator">
-      <a href="#contact" style="text-decoration: none;">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </a>
     </div>
   </section>
 
