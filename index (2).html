@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love by the Studio | Luxury Wedding Branding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burgundy: #722F37;
+      --burgundy-dark: #5a252c;
+      --cream: #FAF7F2;
+      --cream-dark: #F0EBE3;
+      --gold: #C9A962;
+      --text-dark: #2D2A26;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Decorative elements */
+    .sparkle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      opacity: 0.6;
+    }
+
+    .sparkle::before,
+    .sparkle::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+    }
+
+    .sparkle::before {
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .sparkle::after {
+      width: 100%;
+      height: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, var(--cream) 0%, transparent 100%);
+    }
+
+    .logo {
+      font-family: 'Pinyon Script', cursive;
+      font-size: 1.8rem;
+      color: var(--burgundy);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--burgundy);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+      background: var(--cream);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(114, 47, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(201, 169, 98, 0.05) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tagline {
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Pinyon Script', cursive;
+      font-size: clamp(4rem, 12vw, 9rem);
+      font-weight: 400;
+      color: var(--burgundy);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--burgundy);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards;
+    }
+
+    .cta-button:hover {
+      background: var(--burgundy-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(114, 47, 55, 0.2);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 1.2s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--burgundy);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 8rem 4rem;
+      background: var(--burgundy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .services::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      border: 1px solid rgba(250, 247, 242, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .services::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(250, 247, 242, 0.05);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Pinyon Script', cursive;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(250, 247, 242, 0.15);
+      transition: all 0.4s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-5px);
+    }
+
+    .service-number {
+      font-family: 'Pinyon Script', cursive;
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .service-desc {
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(250, 247, 242, 0.7);
+      line-height: 1.8;
+    }
+
+    /* About Section */
+    .about {
+      padding: 8rem 4rem;
+      background: var(--cream);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about-content {
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .about .section-label {
+      color: var(--burgundy);
+    }
+
+    .about .section-title {
+      color: var(--burgundy);
+      margin-bottom: 2rem;
+    }
+
+    .about-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 2;
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+    }
+
+    .signature {
+      font-family: 'Pinyon Script', cursive;
+      font-size: 2.5rem;
+      color: var(--burgundy);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 4rem;
+      background: var(--cream-dark);
+      text-align: center;
+      position: relative;
+    }
+
+    .cta-section .sparkle:nth-child(1) { top: 20%; left: 15%; }
+    .cta-section .sparkle:nth-child(2) { top: 30%; right: 20%; }
+    .cta-section .sparkle:nth-child(3) { bottom: 25%; left: 25%; }
+
+    .cta-title {
+      font-family: 'Pinyon Script', cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--burgundy);
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 450px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      width: 100%;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: var(--cream);
+      border: 1px solid rgba(114, 47, 55, 0.2);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(45, 42, 38, 0.5);
+      font-style: italic;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--burgundy);
+      box-shadow: 0 0 0 3px rgba(114, 47, 55, 0.1);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form .cta-button {
+      margin-top: 0.5rem;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 1;
+      animation: none;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 4rem;
+      background: var(--burgundy);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Pinyon Script', cursive;
+      font-size: 2rem;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 242, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--cream);
+    }
+
+    .copyright {
+      font-size: 0.85rem;
+      color: rgba(250, 247, 242, 0.5);
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scaleY(0.5);
+        opacity: 0.5;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero, .services, .about, .cta-section {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">Love by the Studio</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Inquire</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tagline">Luxury Wedding Branding</p>
+      <h1 class="hero-title">Love by the Studio</h1>
+      <p class="hero-subtitle">A personalized creative journey designed for intentional couples who seek a more elevated, curated and unique wedding brand.</p>
+      <a href="#contact" class="cta-button">Book Your Spot</a>
+    </div>
+    <div class="scroll-indicator">
+      <a href="#contact" style="text-decoration: none;">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-header">
+      <p class="section-label">What We Create</p>
+      <h2 class="section-title">Services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3 class="service-name">Brand Identity</h3>
+        <p class="service-desc">Logo design, color palettes, and typography that tells your unique love story.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3 class="service-name">Website Design</h3>
+        <p class="service-desc">A beautiful home for your story, details, and RSVPs — designed just for you.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3 class="service-name">Wedding Day Touches</h3>
+        <p class="service-desc">Menus, signage, programs, and all the little touches that tie your day together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-content">
+      <p class="section-label">The Heart Behind It</p>
+      <h2 class="section-title">Hello, Lovely</h2>
+      <p class="about-text">We are a design studio with a deep love for romance, intention, and the magic of wedding days. Your wedding should feel like you — every detail, every word, every design. We are here to take your love story and turn it into something you can hold, share, and remember forever.</p>
+      <p class="signature">With love, LBTS</p>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <h2 class="cta-title">Ready to Fall in Love with Your Wedding Brand?</h2>
+    <p class="cta-subtitle">Limited spots available for 2026</p>
+    
+    <form name="inquiry" method="POST" data-netlify="true" action="https://calendly.com/thestudiong/meeting" class="contact-form">
+      <input type="hidden" name="form-name" value="inquiry">
+      <div class="form-group">
+        <input type="text" name="names" placeholder="Your Names" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="wedding-date" placeholder="Wedding Date (or tentative)">
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Tell us a little about your vision..." rows="4"></textarea>
+      </div>
+      <button type="submit" class="cta-button">Send Inquiry</button>
+    </form>
+  </section>
+
+  <footer>
+    <p class="footer-logo">Love by the Studio</p>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/lovebythestudio/" target="_blank">Instagram</a>
+      <a href="mailto:thestudiong@gmail.com">Email</a>
+    </div>
+    <p class="copyright">© 2026 Love by the Studio. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
