@@ -537,6 +537,12 @@
       <p class="hero-subtitle">A personalized creative journey designed for intentional couples who seek a more elevated, curated and unique wedding brand.</p>
       <a href="#contact" class="cta-button">Book Your Spot</a>
     </div>
+    <div class="scroll-indicator">
+      <a href="#contact" style="text-decoration: none;">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </a>
+    </div>
   </section>
 
   <section class="services" id="services">
@@ -579,7 +585,7 @@
     <h2 class="cta-title">Ready to Fall in Love with Your Wedding Brand?</h2>
     <p class="cta-subtitle">Limited spots available for 2026</p>
     
-    <form name="inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="https://calendly.com/thestudiong/meeting" class="contact-form">
+    <form name="inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form" id="inquiry-form">
       <input type="hidden" name="form-name" value="inquiry">
       <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-group">
@@ -606,6 +612,28 @@
     </div>
     <p class="copyright">© 2026 Love by the Studio. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const formData = new FormData(form);
+      
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        window.location.href = 'https://calendly.com/thestudiong/meeting';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+      });
+    });
+  </script>
 
 </body>
 </html>
